@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker_creds', usernameVariable: 'hemanth512', passwordVariable: 'Khcs@0512')]) {
                     script {
-                        bat 'D:/Project3_18_7_24'
+                        bat 'D:\Project3_18_7_24'
                         bat 'docker build -t project3 .'
                         bat 'docker run -d --name project3cont -p 8099:80 project3'
                     }
