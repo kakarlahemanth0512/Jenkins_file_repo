@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'KH07', url: 'https://github.com/kakarlahemanth0512/Jenkins_file_repo.git'
+                git branch: 'master', credentialsId: "KH07", url: 'https://github.com/kakarlahemanth0512/Jenkins_file_repo.git'
             }
         }
 
@@ -18,7 +18,6 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker_creds', usernameVariable: 'hemanth512', passwordVariable: 'Khcs@0512')]) {
                     script {
-                        bat 'D:/Project3_18_7_24'
                         bat 'docker build -t project3 .'
                         bat 'docker run -d --name project3cont -p 8099:80 project3'
                     }
@@ -27,3 +26,4 @@ pipeline {
         }
     }
 }
+
