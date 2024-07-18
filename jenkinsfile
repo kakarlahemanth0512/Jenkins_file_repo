@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_CREDENTIALS_ID = 'Docker_creds'
+        DOCKER_IMAGE = 'project3'
+        GITHUB_CREDENTIALS_ID = 'KH07'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'KH07', url: 'https://github.com/kakarlahemanth0512/Jenkins_file_repo.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker_creds', usernameVariable: 'hemanth512', passwordVariable: 'Khcs@0512')]) {
+                    script {
+                        bat 'docker build -t project3 .'
+                        bat 'docker run -d --name project3cont -p 8099:80 project3'
+                    }
+                }
+            }
+        }
+    }
+}
